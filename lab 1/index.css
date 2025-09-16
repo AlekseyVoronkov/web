@@ -14,7 +14,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
   width: 100%;
 }
 
@@ -42,7 +41,7 @@
 
 .hero-section {
     width: 100%;
-    background-image: url('bg1.svg');
+    background-image: url('img/bg1.svg');
     background-size: cover;
     background-position: center;
     padding: 100px 0;
@@ -182,15 +181,14 @@
     padding-top: 50px;
 }
 
-.blog-theme {
+.section-theme {
     font-size: 1.5rem;
     color: #8A53FF;
     margin: 0;
     font-family: 'Roboto', sans-serif;
     letter-spacing: 1.5px;
 }
-
-.blog-title {
+.section-title {
     font-size: 3.5rem;
     font-weight: 700;
     color: #434343;
@@ -198,7 +196,6 @@
     letter-spacing: 1.5px;
     white-space: nowrap;
 }
-
 .blog-text {
     font-size: 1.5rem;
     color: #434343;
@@ -273,23 +270,6 @@
     box-sizing: border-box;
 }
 
-.promo-theme {
-    font-size: 1.5rem;
-    color: #8A53FF;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.promo-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
-}
-
 .promo-container {
     width: auto;
     margin: 0 auto;
@@ -306,14 +286,14 @@
     letter-spacing: 1.5px;
 }
 
-.promo-iceland {
+.promo-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.promo-iceland-name {
+.promo-card-name {
     font-size: 1.5rem;
     font-weight: 700;
     color: #434343;
@@ -321,69 +301,10 @@
     letter-spacing: 1.5px;
 }
 
-.promo-iceland-image {
+.promo-card-image {
     width: 300px;
     height: 400px;
-}
-
-.promo-italy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.promo-italy-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.promo-italy-image {
-    width: 300px;
-    height: 400px;
-}
-
-.promo-dubai {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.promo-dubai-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.promo-dubai-image {
-    width: 300px;
-    height: 400px;
-}
-
-.promo-patagonia {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.promo-patagonia-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.promo-patagonia-image {
-    width: 300px;
-    height: 400px;
+    border-radius: 8px;
 }
 
 .suggest-section {
@@ -397,23 +318,6 @@
     background-size: cover;
     background-position: center;
     padding: 100px 0;
-}
-
-.suggest-theme {
-    font-size: 1.5rem;
-    color: #8A53FF;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.suggest-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
 }
 
 .suggest-container {
@@ -490,23 +394,6 @@
     justify-content: center;
     box-sizing: border-box;
     width: 100%;
-}
-
-.recent-story-section-theme {
-    font-size: 1.5rem;
-    color: #8A53FF;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: 1.5px;
-}
-
-.recent-story-section-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #434343;
-    font-family: 'Changa One', sans-serif;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
 }
 
 .recent-story-container {
