@@ -1,0 +1,85 @@
+.blog-section {
+    width: 100%;
+    padding: 100px 0;
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 100;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.blog-content-container {
+    padding-left: 100px;
+    padding-top: 50px;
+}
+
+.blog-text {
+    font-size: 1.5rem;
+    color: #434343;
+    font-family: 'Roboto', sans-serif;
+    line-height: 33px;
+}
+
+.blog-image {
+    width: 630px;
+    height: 450px;
+    border-radius: 8;
+}
+
+.blog-btn {
+    background: #8A53FF;
+    border-radius: 50%;
+    padding: 15px;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: none;
+    cursor: pointer;
+}
+
+.blog-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 16px;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+.blog-btn::after {
+    content: "Watch highlights";
+    font-size: 1rem;
+    position: absolute;
+    left: 100px;
+    white-space: nowrap;
+    color: #8A53FF;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.blog-btn:hover {
+    background-color: #8953ff42;
+    border-color: transparent transparent transparent rgb(255, 0, 0);
+}
+
+.blog-btn:hover::before {
+    border-color: transparent transparent transparent #8A53FF;
+}

@@ -1,0 +1,61 @@
+body, html {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.header {
+    padding: 0 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.logo {
+    width: 100px;
+    height: 64px;
+}
+
+.search, .profile {
+    width: 24px;
+    height: 24px;
+}
+
+.nav-text {
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+.accent-text {
+    color: #8A53FF;
+    cursor: pointer;
+}
+
+.section-theme {
+    font-size: 1.5rem;
+    color: #8A53FF;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1.5px;
+}
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #434343;
+    font-family: 'Changa One', sans-serif;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}

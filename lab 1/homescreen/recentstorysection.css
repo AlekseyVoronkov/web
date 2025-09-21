@@ -1,0 +1,138 @@
+.recent-story-section {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.recent-story-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.recent-story-zermatt {
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-story-zermatt-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.recent-story-zermatt-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.recent-story-zermatt-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.recent-story-right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.recent-story-tuscany, .recent-story-kyoto, .recent-story-lofoten {
+    background-color: #F9F9F9;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.recent-story-zermatt-image {
+    width: 600px;
+    height: 350px;
+    border-radius: 12px;
+}
+
+.recent-story-tuscany-image, .recent-story-kyoto-image, .recent-story-lofoten-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    padding-bottom: 30px;
+}
+
+.recent-story-tuscany-content, .recent-story-kyoto-content, .recent-story- {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.recent-story-zermatt-title, .recent-story-tuscany-title, .recent-story-kyoto-title, .recent-story-lofoten-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #434343;
+    font-family: 'Changa One', sans-serif;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+.recent-story-zermatt-text, .recent-story-tuscany-text, .recent-story-kyoto-text, .recent-story-lofoten-text {
+    font-size: 1rem;
+    color: #576074;
+    font-family: 'Roboto', sans-serif;
+}
+
+.recent-story-zermatt-btn {
+    background: #8A53FF;
+    border-radius: 50%;
+    padding: 15px;
+    color: #ffffff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 80px;
+    transition: all 0.3s ease;
+}
+
+.recent-story-zermatt-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 16px;
+    border-color: transparent transparent transparent #ffffff;
+}
+
+.recent-story-zermatt-btn:hover {
+    background-color: #8953ff42;
+    border-color: transparent transparent transparent rgb(255, 0, 0);
+}
+
+.recent-story-zermatt-btn:hover::before {
+    border-color: transparent transparent transparent #8A53FF;
+}

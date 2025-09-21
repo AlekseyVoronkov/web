@@ -1,0 +1,118 @@
+.blog-section {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 200px;
+    box-sizing: border-box;
+}
+
+.article-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.article-header-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.article-author {
+    padding-top: 70px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.article-author-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.article-author-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 1.1;
+}
+
+.article-hero-video {
+    width: 100%;
+    height: 800px;
+    border-radius: 8px;
+    object-fit: cover;
+} 
+
+.text {
+    font-size: 1.3rem;
+    color: #434343;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.subtext {
+    font-size: 0.9rem;
+    color: #939EB4;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    font-style: italic;
+}
+
+.callout-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 0;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.callout-image-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.callout-image {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    box-sizing: border-box;
+    align-items: flex-start;
+    flex: 1.5; 
+}
+
+.callout-img-right1 {
+    width: 330px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.callout-img-right2 {
+    width: 330px;
+    height: 310px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.callout-img-left {
+    width: 330px;
+    height: 680px;    
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.callout-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-sizing: border-box;
+}
