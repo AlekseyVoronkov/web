@@ -1,0 +1,27 @@
+.addButton {
+    width: 120px;
+    height: 120px;
+    background-color: #1B1A17;
+    border-radius: 20px;
+    border-color: #FF8303;
+    border-width: 2px;
+    text-align: center;
+    color: #FF8303;
+    font-size: 6rem;
+}
+
+.textBox {
+    display: block;
+    width: 95%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #F0E3CAA3;
+    background-color: #242320;
+    background-clip: padding-box;
+    border: 1px solid #FF8303;
+    border-radius: 0.25rem;
+}
