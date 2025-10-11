@@ -135,6 +135,12 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.appendChild(shareContainer);
 
         document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
     }
 
     function openEditModal(task) {
