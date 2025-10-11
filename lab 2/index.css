@@ -204,6 +204,31 @@ body {
     border-radius: 10px;
 }
 
+.share-container {
+    position: fixed;
+    max-height: 600px;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #1B1A17;
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.share-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #23221F;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
 .alert-overlay {
     position: fixed;
     top: 0;

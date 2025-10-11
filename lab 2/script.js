@@ -65,7 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 taskOptions.appendChild(taskOptionShare);
                 taskOptions.appendChild(taskOptionInfo);
                 taskOptions.appendChild(taskOptionEdit);
-                tasksContainer.appendChild(taskOptions);
+
+                taskDiv.parentNode.insertBefore(taskOptions, taskDiv.nextSibling);
+
 
                 taskOptionShare.addEventListener('click', function() {
                     openShareModal(taskDiv);
@@ -85,6 +87,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         updateNoTasksMessage();
+    }
+
+    function openShareModal() {
+        let overlay = document.createElement('div');
+        overlay.className = 'alert-overlay';
+        let shareContainer = document.createElement('section');
+        shareContainer.className = 'share-container';
+
+        let shareCopyButton = document.createElement('button');
+        shareCopyButton.className = "share-button";
+        let shareCopyImage = document.createElement('img');
+        shareCopyImage.src = 'img/shareCopy.svg';
+        shareCopyButton.appendChild(shareCopyImage);
+
+        let shareVKButton = document.createElement('button');
+        shareVKButton.className = "share-button";
+        let shareVkImage = document.createElement('img');
+        shareVkImage.src = 'img/shareVK.svg';
+        shareVKButton.appendChild(shareVkImage);
+
+
+        let shareTGButton = document.createElement('button');
+        shareTGButton.className = "share-button";
+        let shareTGImage = document.createElement('img');
+        shareTGImage.src = 'img/shareTG.svg';
+        shareTGButton.appendChild(shareTGImage);
+
+
+        let shareWAButton = document.createElement('button');
+        shareWAButton.className = "share-button";
+        let shareWAImage = document.createElement('img');
+        shareWAImage.src = 'img/shareWA.svg';
+        shareWAButton.appendChild(shareWAImage);
+
+        let shareFBButton = document.createElement('button');
+        shareFBButton.className = "share-button";
+        let shareFBImage = document.createElement('img');
+        shareFBImage.src = 'img/shareFB.svg';
+        shareFBButton.appendChild(shareFBImage);
+
+        shareContainer.appendChild(shareCopyButton);
+        shareContainer.appendChild(shareVKButton);
+        shareContainer.appendChild(shareTGButton);
+        shareContainer.appendChild(shareWAButton);
+        shareContainer.appendChild(shareFBButton);
+        overlay.appendChild(shareContainer);
+
+        document.body.appendChild(overlay);
     }
 
     function openEditModal(task) {
