@@ -131,7 +131,7 @@ body {
     width: 32px;
     height: 32px;
     background-color: #1B1A17;
-    border-radius: 10px;
+    border-radius: 6px;
     border-color: #FF8303;
     text-align: center;
     color: #FF8303;
@@ -146,6 +146,64 @@ body {
     color: #1B1A17;
 }
 
+.task-options {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.task-options-button {
+    width: 36px;
+    height: 36px;
+    background-color: #242320;
+    border-radius: 6px;
+    border-color: #A35709;
+    color: #FF8303;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.edit-container {
+    position: fixed;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #1B1A17;
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.edit-container .textBox {
+    width: 100%;
+    flex: 1;
+    padding: 1rem 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #F0E3CA;
+    background-color: #242320;
+    border: 2px solid #FF8303;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    min-height: 60px;
+}
+
+.edit-container .alert-button-yes,
+.edit-container .alert-button-no {
+    width: 120px;
+    height: 48px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
 .alert-overlay {
     position: fixed;
     top: 0;
@@ -154,7 +212,6 @@ body {
     height: 100%;
     background: #1b1a1749;
     backdrop-filter: blur(3px) brightness(0.6);
-    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -169,7 +226,6 @@ body {
     background-color: #1B1A17;
     border-top: 4px solid #A35709;
     border-radius: 10px;
-    z-index: 1000;
 }
 
 .alert-title {
@@ -216,3 +272,4 @@ body {
     background-color: #FF8303;
     color: #1B1A17;
 }
+

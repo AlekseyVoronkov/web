@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let descriptionInput = document.querySelectorAll('.textBox')[1];
     let tasksContainer = document.querySelector('.tasks');
 
-
     updateNoTasksMessage();
 
     function createTask(title, description) {
@@ -37,7 +36,110 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteTaskAlert(closeButton.parentNode);
             updateNoTasksMessage();
         });
+
+        taskDiv.addEventListener('click', function(e) {
+            let existingOptions = document.querySelector('.task-options');
+
+            if (e.target != closeButton && !existingOptions) {
+                let taskOptions = document.createElement('div');
+                taskOptions.className = 'task-options';
+
+                let taskOptionShare = document.createElement('button');
+                taskOptionShare.className = "task-options-button";
+                let shareImage = document.createElement('img');
+                shareImage.src = 'img/share.svg';
+                taskOptionShare.appendChild(shareImage);
+
+                let taskOptionInfo = document.createElement('button');
+                taskOptionInfo.className = "task-options-button";
+                let infoImage = document.createElement('img');
+                infoImage.src = 'img/info.svg';
+                taskOptionInfo.appendChild(infoImage);
+
+                let taskOptionEdit = document.createElement('button');
+                taskOptionEdit.className = "task-options-button";
+                let editImage = document.createElement('img');
+                editImage.src = 'img/edit.svg';
+                taskOptionEdit.appendChild(editImage);
+
+                taskOptions.appendChild(taskOptionShare);
+                taskOptions.appendChild(taskOptionInfo);
+                taskOptions.appendChild(taskOptionEdit);
+                tasksContainer.appendChild(taskOptions);
+
+                taskOptionShare.addEventListener('click', function() {
+                    openShareModal(taskDiv);
+                });
+
+                taskOptionInfo.addEventListener('click', function() {
+                    openInfoModal(taskDiv);
+                });
+
+                taskOptionEdit.addEventListener('click', function() {
+                    openEditModal(taskDiv);
+                });
+            }
+            else if (e.target != closeButton && existingOptions) {
+                existingOptions.remove();
+            }
+        });
+
         updateNoTasksMessage();
+    }
+
+    function openEditModal(task) {
+        let taskTitle = task.querySelector('.task-title').textContent;
+        let taskDesc = task.querySelector('.task-desc').textContent;
+        let overlay = document.createElement('div');
+        overlay.className = 'alert-overlay';
+        let editContainer = document.createElement('section');
+        editContainer.className = 'edit-container';
+
+        let editTitle = document.createElement('input');
+        editTitle.className = 'textBox';
+        editTitle.value  = taskTitle;
+
+        let editDesc = document.createElement('input');
+        editDesc.className = 'textBox';
+        editDesc.value  = taskDesc;
+        
+        let editOptions = document.createElement('div');
+        editOptions.className = 'delete-alert-options'
+
+        let editButtonCancel = document.createElement('button');
+        editButtonCancel.className = 'alert-button-no';
+        editButtonCancel.textContent = 'Cancel';
+
+        let editButtonSave = document.createElement('button');
+        editButtonSave.className = 'alert-button-yes';
+        editButtonSave .textContent = 'Save';
+        
+
+        editContainer.appendChild(editTitle);
+        editContainer.appendChild(editDesc);
+        editOptions.appendChild(editButtonSave);
+        editOptions.appendChild(editButtonCancel);
+        editContainer.appendChild(editOptions);
+
+        overlay.appendChild(editContainer);
+
+        document.body.appendChild(overlay);
+
+        editButtonSave.addEventListener('click', function() {
+            task.querySelector('.task-title').textContent = editTitle.value;
+            task.querySelector('.task-desc').textContent = editDesc.value;
+            overlay.remove();
+        });
+
+        editButtonCancel.addEventListener('click', function() {
+            overlay.remove();
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
     }
 
     function deleteTaskAlert(task) {
