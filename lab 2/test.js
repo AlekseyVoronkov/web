@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let descriptionInput = document.querySelectorAll('.textBox')[1];
     let tasksContainer = document.querySelector('.tasks');
 
+
     updateNoTasksMessage();
 
     function createTask(title, description) {
@@ -33,10 +34,57 @@ document.addEventListener('DOMContentLoaded', function() {
         tasksContainer.appendChild(taskDiv);
         
         closeButton.addEventListener('click', function() {
-            taskDiv.remove();
+            deleteTaskAlert(closeButton.parentNode);
             updateNoTasksMessage();
         });
         updateNoTasksMessage();
+    }
+
+    function deleteTaskAlert(task) {
+        let overlay = document.createElement('div');
+        overlay.className = 'alert-overlay';
+        let deleteAlert = document.createElement('section');
+        deleteAlert.className = 'delete-alert';
+
+        let alertTitle = document.createElement('h1');
+        alertTitle.className = 'alert-title';
+        alertTitle.textContent = 'Delete this task?';
+        
+        let deleteAlertOptions = document.createElement('div');
+        deleteAlertOptions.className = 'delete-alert-options'
+        let alertButtonYes = document.createElement('button');
+        alertButtonYes.className = 'alert-button-yes';
+        alertButtonYes.textContent = 'Yes';
+
+        let alertButtonNo = document.createElement('button');
+        alertButtonNo.className = 'alert-button-yes';
+        alertButtonNo.textContent = 'No';
+        
+
+        deleteAlert.appendChild(alertTitle);
+        deleteAlertOptions.appendChild(alertButtonYes);
+        deleteAlertOptions.appendChild(alertButtonNo);
+        deleteAlert.appendChild(deleteAlertOptions);
+
+        overlay.appendChild(deleteAlert);
+
+        document.body.appendChild(overlay);
+
+        alertButtonYes.addEventListener('click', function() {
+            overlay.remove();
+            task.remove();
+            updateNoTasksMessage();
+        });
+
+        alertButtonNo.addEventListener('click', function() {
+            overlay.remove();
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
     }
 
     function addTask() {
