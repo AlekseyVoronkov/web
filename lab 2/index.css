@@ -1,0 +1,124 @@
+body {
+    background-color: #1B1A17;
+    gap: 33px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex: 1;
+    gap: 8px;
+    align-items: center;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.addButton {
+    width: auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    background-color: #1B1A17;
+    border: 2px solid #FF8303;
+    border-radius: 10px;
+    text-align: center;
+    color: #FF8303;
+    font-size: 4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #FF8303;
+    color: #1B1A17;
+}
+
+.textBox {
+    display: block;
+    flex: 1;
+    padding: 0.375rem 0.75rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #F0E3CAA3;
+    background-color: #242320;
+    background-clip: padding-box;
+    border: 1px solid #FF8303;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+.tasks {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    flex: 1;
+    gap: 16px;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid #A35709;
+    border-radius: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
+    gap: 16px;
+}
+
+.task-text {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.task-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #F0E3CA;
+    margin: 0;
+}
+
+.task-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #F0E3CA;
+    margin: 0;
+}
+
+.closeButton {
+    width: 32px;
+    height: 32px;
+    background-color: #1B1A17;
+    border-radius: 10px;
+    border-color: #FF8303;
+    text-align: center;
+    color: #FF8303;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+    background-color: #FF8303;
+    color: #1B1A17;
+}
