@@ -7,6 +7,7 @@ body {
 }
 
 .form {
+    padding-top: 30px;
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
@@ -18,13 +19,14 @@ body {
 .inputs {
     display: flex;
     flex-direction: column;
+    height: 80px;
     gap: 6px;
     flex: 1;
 }
 
 .addButton {
-    width: auto;
-    height: 80px;
+    width: 80px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +47,7 @@ body {
 }
 
 .textBox {
-    display: block;
+    display: flex;
     flex: 1;
     padding: 0.375rem 0.75rem;
     font-family: 'Roboto', sans-serif;
@@ -58,6 +60,26 @@ body {
     border: 1px solid #FF8303;
     border-radius: 0.25rem;
     box-sizing: border-box;
+}
+
+.no-tasks {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    flex: 1;
+    left: 50%;
+}
+
+.no-tasks-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1rem 1rem;
+    background: 
+    linear-gradient(to right, #FF8303, #FF8303) center top / 100px 4px no-repeat,
+    linear-gradient(to right, #FF8303, #FF8303) center bottom / 100px 4px no-repeat;
 }
 
 .tasks {
