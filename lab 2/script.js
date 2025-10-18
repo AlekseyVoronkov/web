@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function openShareModal() {
+        const urlToShare = window.location.href;
+        const textToShare = "Damn boy, what a cool task manager!";
+
         let overlay = document.createElement('div');
         overlay.className = 'alert-overlay';
         let shareContainer = document.createElement('section');
@@ -134,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function() {
         shareTGImage.src = 'img/shareTG.svg';
         shareTGButton.appendChild(shareTGImage);
 
-
         let shareWAButton = document.createElement('button');
         shareWAButton.className = "share-button";
         let shareWAImage = document.createElement('img');
@@ -155,6 +157,32 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay.appendChild(shareContainer);
 
         document.body.appendChild(overlay);
+
+        shareCopyButton.addEventListener('click', function() {
+            navigator.clipboard.writeText(urlToShare).then(function() {
+                alert('Link copied to clipboard!');
+            });
+        });
+
+        shareVKButton.addEventListener('click', function() {
+            const vkShareLink = `https://vk.com/share.php?url=${encodeURIComponent(urlToShare)}&title=${encodeURIComponent(textToShare)}`;
+            window.open(vkShareLink, '_blank');
+        });
+
+        shareTGButton.addEventListener('click', function() {
+            const telegramShareLink = `https://telegram.me/share/url?url=${encodeURIComponent(urlToShare)}&text=${encodeURIComponent(textToShare)}`;
+            window.open(telegramShareLink, '_blank');
+        });
+
+        shareWAButton.addEventListener('click', function() {
+            const waShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(textToShare + ' ' + urlToShare)}`;
+            window.open(waShareLink, '_blank');
+        });
+
+        shareFBButton.addEventListener('click', function() {
+            const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
+            window.open(fbShareLink, '_blank');
+        });
 
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay) {
