@@ -4,22 +4,41 @@ document.addEventListener('DOMContentLoaded', function() {
     let descriptionInput = document.querySelectorAll('.textBox')[1];
     let tasksContainer = document.querySelector('.tasks');
 
-    updateNoTasksMessage();
+    let tasks = [];
 
-    function createTask(title, description) {
+    function saveTasks() {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+        const tasksJSON = localStorage.getItem('tasks');
+
+        if(tasksJSON) {
+            tasks = JSON.parse(tasksJSON);
+        }
+
+        tasks.forEach(task => {
+            renderTask(task);
+        });
+
+        updateNoTasksMessage();
+    }
+
+    function renderTask(task) {
         let taskDiv = document.createElement('div');
         taskDiv.className = 'task';
+        taskDiv.dataset.id = task.id;
 
         let taskTextDiv = document.createElement('div');
         taskTextDiv.className = 'task-text';
         
         let taskTitle = document.createElement('h1');
         taskTitle.className = 'task-title';
-        taskTitle.textContent = title;
+        taskTitle.textContent = task.title;
         
         let taskDesc = document.createElement('p');
         taskDesc.className = 'task-desc';
-        taskDesc.textContent = description;
+        taskDesc.textContent = task.description;
         
         let closeButton = document.createElement('button');
         closeButton.className = 'closeButton';
@@ -29,12 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
         taskTextDiv.appendChild(taskDesc);
         taskDiv.appendChild(taskTextDiv);
         taskDiv.appendChild(closeButton);
-        
         tasksContainer.appendChild(taskDiv);
-        
+
         closeButton.addEventListener('click', function() {
+            const idToDelete = task.id;
+            tasks = tasks.filter(t => t.id !== idToDelete);
+
+            saveTasks();
             deleteTaskAlert(closeButton.parentNode);
-            updateNoTasksMessage();
         });
 
         taskDiv.addEventListener('click', function(e) {
@@ -85,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 existingOptions.remove();
             }
         });
-
         updateNoTasksMessage();
     }
 
@@ -143,9 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function openEditModal(task) {
-        let taskTitle = task.querySelector('.task-title').textContent;
-        let taskDesc = task.querySelector('.task-desc').textContent;
+    function openEditModal(taskDiv) {
+        let taskId = taskDiv.dataset.id;
+        let currentTask = tasks.find(t => t.id == taskId);
+        let taskTitle = taskDiv.querySelector('.task-title').textContent;
+        let taskDesc = taskDiv.querySelector('.task-desc').textContent;
         let overlay = document.createElement('div');
         overlay.className = 'alert-overlay';
         let editContainer = document.createElement('section');
@@ -182,8 +204,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(overlay);
 
         editButtonSave.addEventListener('click', function() {
-            task.querySelector('.task-title').textContent = editTitle.value;
-            task.querySelector('.task-desc').textContent = editDesc.value;
+            currentTask.title = editTitle.value;
+            currentTask.description = editDesc.value;
+
+            saveTasks();
+
+            taskDiv.querySelector('.task-title').textContent = editTitle.value;
+            taskDiv.querySelector('.task-desc').textContent = editDesc.value;
             overlay.remove();
         });
 
@@ -250,14 +277,22 @@ document.addEventListener('DOMContentLoaded', function() {
         let description = descriptionInput.value;
         
         if(title.trim() === '' || description.trim() === '') {
-            // should make a modal window for that later ig
             alert('Fill a title and description fields please!');
             return;
         }
 
-        createTask(title, description);
+        const newTask = {
+            id: Date.now(),
+            title: title,
+            description: description
+        };
+        tasks.push(newTask);
+        saveTasks();
+        renderTask(newTask);
+
         titleInput.value = '';
         descriptionInput.value = '';
+        updateNoTasksMessage();
     }
 
     addButton.addEventListener('click', addTask);
@@ -279,4 +314,6 @@ document.addEventListener('DOMContentLoaded', function() {
             existingMessage.remove();
         }
     }
+
+    loadTasks();
 })
