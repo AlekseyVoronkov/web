@@ -191,6 +191,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function openInfoModal(taskDiv) {
+        let taskTitle = taskDiv.querySelector('.task-title').textContent;
+        let taskDesc = taskDiv.querySelector('.task-desc').textContent;
+        let overlay = document.createElement('div');
+        overlay.className = 'alert-overlay';
+        let infoContainer = document.createElement('section');
+        infoContainer.className = 'delete-alert';
+        let infoTitle = document.createElement('h1');
+        infoTitle.className = 'task-title';
+        infoTitle.textContent = taskTitle;
+        let infoDesc = document.createElement('p');
+        infoDesc.className = 'task-desc';
+        infoDesc.textContent = taskDesc;
+        infoContainer.appendChild(infoTitle);
+        infoContainer.appendChild(infoDesc);
+        overlay.appendChild(infoContainer);
+        document.body.appendChild(overlay);
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+    }
     function openEditModal(taskDiv) {
         let taskId = taskDiv.dataset.id;
         let currentTask = tasks.find(t => t.id == taskId);
