@@ -56,14 +56,12 @@
 .text {
     font-size: 1.3rem;
     color: #434343;
-    font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
 .subtext {
     font-size: 0.9rem;
     color: #939EB4;
-    font-family: 'Roboto', sans-serif;
     margin: 0;
     font-style: italic;
 }
@@ -124,7 +122,6 @@
     width: auto;
     border: none;
     border-radius: 8px;
-    font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -172,7 +169,6 @@
 }
 
 .disclaimer-title {
-    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 1.6rem;
     color: #434343;
@@ -180,7 +176,6 @@
 }
 
 .disclaimer-text {
-    font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
     color: #576074;
     line-height: 1.7;

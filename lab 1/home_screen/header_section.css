@@ -4,6 +4,10 @@ body, html {
     max-width: 100%;
 }
 
+body {
+    font-family: 'Roboto', sans-serif
+}
+
 .header {
     padding: 0 100px;
     width: 100%;
@@ -36,7 +40,6 @@ body, html {
 .nav-text {
     font-size: 18px;
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
 }
 
 .accent-text {
@@ -48,7 +51,6 @@ body, html {
     font-size: 1.5rem;
     color: #8A53FF;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
     letter-spacing: 1.5px;
 }
 .section-title {
