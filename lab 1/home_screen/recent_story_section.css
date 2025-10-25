@@ -11,7 +11,7 @@
 .recent-story-container {
     display: flex;
     width: 100%;
-    max-width: 1200px;
+    max-width: min(100%, 1400px);
     gap: 30px;
     padding: 0 20px;
     box-sizing: border-box;

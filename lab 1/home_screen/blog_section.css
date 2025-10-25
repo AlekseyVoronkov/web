@@ -6,10 +6,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
 .blog-container {
-    max-width: 1200px;
+    max-width: auto;
     margin: 0 100;
     display: flex;
     box-sizing: border-box;

@@ -13,7 +13,7 @@
 
 .suggest-container {
     width: 90%;
-    max-width: 800px;
+    max-width:  min(100%, 800px);;
     margin: 50px auto;
     display: flex;
     gap: 10px;
