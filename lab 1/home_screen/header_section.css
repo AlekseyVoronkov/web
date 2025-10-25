@@ -8,6 +8,10 @@ body {
     font-family: 'Roboto', sans-serif
 }
 
+button {
+    cursor: pointer
+}
+
 .header {
     padding: 0 100px;
     width: 100%;
