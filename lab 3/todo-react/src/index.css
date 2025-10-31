@@ -1,0 +1,321 @@
+body {
+    background-color: #1B1A17;
+    gap: 33px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 0;
+}
+
+.form {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    flex: 1;
+    gap: 8px;
+    align-items: center;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    gap: 6px;
+    flex: 1;
+}
+
+.addButton {
+    width: 80px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    background-color: #1B1A17;
+    border: 2px solid #FF8303;
+    border-radius: 10px;
+    text-align: center;
+    color: #FF8303;
+    font-size: 4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #FF8303;
+    color: #1B1A17;
+}
+
+.textBox {
+    display: flex;
+    flex: 1;
+    padding: 0.375rem 0.75rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #F0E3CAA3;
+    background-color: #242320;
+    background-clip: padding-box;
+    border: 1px solid #FF8303;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+.no-tasks {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    flex: 1;
+    left: 50%;
+}
+
+.no-tasks-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5rem;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1rem 1rem;
+    background: 
+    linear-gradient(to right, #FF8303, #FF8303) center top / 100px 4px no-repeat,
+    linear-gradient(to right, #FF8303, #FF8303) center bottom / 100px 4px no-repeat;
+}
+
+.tasks {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    flex: 1;
+    gap: 16px;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid #A35709;
+    background-color: #242320;
+    border-radius: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
+    gap: 16px;
+}
+
+.task-text {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.task-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #F0E3CA;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.task-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #F0E3CA;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.closeButton {
+    width: 32px;
+    height: 32px;
+    background-color: #1B1A17;
+    border-radius: 6px;
+    border-color: #FF8303;
+    text-align: center;
+    color: #FF8303;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+    background-color: #FF8303;
+    color: #1B1A17;
+}
+
+.task-options {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.task-options-button {
+    width: 36px;
+    height: 36px;
+    background-color: #242320;
+    border-radius: 6px;
+    border-color: #A35709;
+    color: #FF8303;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.edit-container {
+    position: fixed;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #1B1A17;
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    gap: 1.5rem;
+}
+
+.edit-container .textBox {
+    width: 100%;
+    flex: 1;
+    padding: 1rem 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #F0E3CA;
+    background-color: #242320;
+    border: 2px solid #FF8303;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    min-height: 60px;
+}
+
+.edit-container .alert-button-yes,
+.edit-container .alert-button-no {
+    width: 120px;
+    height: 48px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+
+.share-container {
+    position: fixed;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #1B1A17;
+    border-radius: 20px 20px 0 0;
+    padding: 2rem;
+    gap: 3rem; /* увеличил отступ между кнопками */
+    height: auto;
+    min-height: 150px;
+}
+
+.share-button {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border-style: none;
+    background-color: #23221F;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.share-button:hover {
+    background-color: #FF8303;
+    transform: scale(1.1);
+}
+
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1b1a1749;
+    backdrop-filter: blur(3px) brightness(0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0.5;
+    box-sizing: border-box;
+    background-color: #1B1A17;
+    border-top: 4px solid #A35709;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.alert-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    padding-top: 32px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.delete-alert-options {
+    padding-top: 42px;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-button-yes,
+.alert-button-no {
+    width: 80px;
+    height: 32px;
+    background-color: #242320;
+    border-radius: 8px;
+    border: 2px solid; 
+    text-align: center;
+    color: #D9D9D9;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.alert-button-yes {
+    border-color: #A35709;
+}
+
+.alert-button-no {
+    border-color: #FF8303;
+}
+
+.alert-button-no:hover, .alert-button-yes:hover {
+    transform: scale(1.05);
+    background-color: #FF8303;
+    color: #1B1A17;
+}
+
