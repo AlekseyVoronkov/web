@@ -61,7 +61,7 @@ function AddForm({onAddTask }) {
 
 function AddTasksSection({ tasks, onDeleteTask }) {
   return (
-    <section className="tasksSection">
+    <section className="tasks">
         {tasks.map(task => (
           <Task
             key={task.id}
@@ -76,16 +76,41 @@ function AddTasksSection({ tasks, onDeleteTask }) {
 }
 
 function Task({ id, title, description, onDelete }) {
+  const [showOptions, setShowOptions] = useState(false);
+
   const handleDeleteClick = () => {
-    onDelete(id)
+    onDelete(id);
+  }
+
+  const handleTaskClick = () => {
+    setShowOptions(!showOptions);
   }
   return (
-    <div className="task">
-      <div className="task-text">
-        <h1 className='task-title'>{title}</h1>
-        <p className='task-desc'>{description}</p>
+    <>
+      <div className="task" onClick={handleTaskClick}>
+        <div className="task-text">
+          <h1 className='task-title'>{title}</h1>
+          <p className='task-desc'>{description}</p>
+        </div>
+        <button className="closeButton" onClick={handleDeleteClick}>x</button>
       </div>
-      <button className="closeButton" onClick={handleDeleteClick}>x</button>
-    </div>
+      {showOptions && <TaskOptions/>}
+    </>
   );
+}
+
+function TaskOptions() {
+  return (
+    <div className='task-options'>
+      <button className='task-options-button'>
+        <img src="src\assets\share.svg" alt="share"/>
+      </button>
+      <button className='task-options-button'>
+        <img src="src\assets\info.svg" alt="info"/>
+      </button>
+      <button className='task-options-button'>
+        <img src="src\assets\edit.svg" alt="edit"/>
+      </button>
+    </div>
+  )
 }
