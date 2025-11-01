@@ -12,10 +12,14 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  const handleDeleteTask = (taskId) => {
+    setTasks(tasks.filter(task => task.id !== taskId));
+  };
+
   return(
     <>
     <AddForm onAddTask={handleAddTask}/>
-    <AddTasksSection tasks={tasks}/>
+    <AddTasksSection tasks={tasks} onDeleteTask={handleDeleteTask}/>
     </>
   );
 }
@@ -27,7 +31,9 @@ function AddForm({onAddTask }) {
   const [description, setDescription] = useState("");
 
   const handleAddTaskClick = () => {
-    onAddTask(title, description);
+    onAddTask(
+      title.trim() || "New task",
+      description.trim() || "No Description");
     setTitle("");
     setDescription("");
   };
@@ -53,28 +59,33 @@ function AddForm({onAddTask }) {
   );
 }
 
-function AddTasksSection({ tasks }) {
+function AddTasksSection({ tasks, onDeleteTask }) {
   return (
     <section className="tasksSection">
         {tasks.map(task => (
           <Task
             key={task.id}
+            id={task.id}
             title={task.title}
             description={task.description}
+            onDelete={onDeleteTask}
           />
         ))}
     </section>
   );
 }
 
-function Task({title, description}) {
+function Task({ id, title, description, onDelete }) {
+  const handleDeleteClick = () => {
+    onDelete(id)
+  }
   return (
     <div className="task">
       <div className="task-text">
         <h1 className='task-title'>{title}</h1>
         <p className='task-desc'>{description}</p>
       </div>
-      <button className="closeButton">x</button>
+      <button className="closeButton" onClick={handleDeleteClick}>x</button>
     </div>
   );
 }
