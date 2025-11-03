@@ -14,7 +14,7 @@ function App() {
 
   const handleEditTask = (id, newTitle, newDescription) => {
     setTasks(tasks.map(task => 
-      task.id = id
+      task.id === id
         ? { ...task, title: newTitle, description: newDescription }
         : task
       ));
