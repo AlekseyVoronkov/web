@@ -94,23 +94,54 @@ function Task({ id, title, description, onDelete }) {
         </div>
         <button className="closeButton" onClick={handleDeleteClick}>x</button>
       </div>
-      {showOptions && <TaskOptions/>}
+      {showOptions && <TaskOptions taskTitle={title} taskDesc={description}/>}
     </>
   );
 }
 
-function TaskOptions() {
+function TaskOptions({ taskTitle, taskDesc }) {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const handleInfoClick = () => {
+    setShowInfo(true);
+  }
+
+  const handleCloseInfo = () => {
+    setShowInfo(false);
+  }
   return (
-    <div className='task-options'>
-      <button className='task-options-button'>
-        <img src="src\assets\share.svg" alt="share"/>
-      </button>
-      <button className='task-options-button'>
-        <img src="src\assets\info.svg" alt="info"/>
-      </button>
-      <button className='task-options-button'>
-        <img src="src\assets\edit.svg" alt="edit"/>
-      </button>
+    <>
+      <div className='task-options'>
+        <button className='task-options-button'>
+          <img src="src\assets\share.svg" alt="share"/>
+        </button>
+        <button className='task-options-button' onClick={handleInfoClick}>
+          <img src="src\assets\info.svg" alt="info"/>
+        </button>
+        <button className='task-options-button'>
+          <img src="src\assets\edit.svg" alt="edit"/>
+        </button>
+      </div>
+
+      {showInfo && (
+        <TaskOptionsInfo
+          taskTitle={taskTitle}
+          taskDesc={taskDesc}
+          onClose={handleCloseInfo}
+        />
+      )}
+    </>
+  );
+}
+
+function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
+
+  return (
+    <div className='alert-overlay' onClick={onClose}>
+      <div className='delete-alert'>
+        <h1 className='task-title'>{taskTitle}</h1>
+        <p className='task-desc'>{taskDesc}</p>
+      </div>
     </div>
-  )
+  );
 }
