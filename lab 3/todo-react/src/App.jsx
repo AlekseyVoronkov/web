@@ -101,6 +101,7 @@ function Task({ id, title, description, onDelete }) {
 
 function TaskOptions({ taskTitle, taskDesc }) {
   const [showInfo, setShowInfo] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   const handleInfoClick = () => {
     setShowInfo(true);
@@ -108,6 +109,14 @@ function TaskOptions({ taskTitle, taskDesc }) {
 
   const handleCloseInfo = () => {
     setShowInfo(false);
+  }
+
+  const handleEditClick = () => {
+    setShowEdit(true);
+  }
+
+  const handleCloseEdit = () => {
+    setShowEdit(false);
   }
   return (
     <>
@@ -118,7 +127,7 @@ function TaskOptions({ taskTitle, taskDesc }) {
         <button className='task-options-button' onClick={handleInfoClick}>
           <img src="src\assets\info.svg" alt="info"/>
         </button>
-        <button className='task-options-button'>
+        <button className='task-options-button' onClick={handleEditClick}>
           <img src="src\assets\edit.svg" alt="edit"/>
         </button>
       </div>
@@ -130,12 +139,19 @@ function TaskOptions({ taskTitle, taskDesc }) {
           onClose={handleCloseInfo}
         />
       )}
+
+      {showEdit && (
+        <TaskOptionsEdit
+          taskTitle={taskTitle}
+          taskDesc={taskDesc}
+          onClose={handleCloseEdit}
+        />
+      )}
     </>
   );
 }
 
 function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
-
   return (
     <div className='alert-overlay' onClick={onClose}>
       <div className='delete-alert'>
@@ -144,4 +160,33 @@ function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
       </div>
     </div>
   );
+}
+
+function TaskOptionsEdit({ taskTitle, taskDesc, onClose }) {
+  const [editTitle, setEditTitle] = useState(taskTitle);
+  const [editDesc, setEditDesc] = useState(taskDesc);
+  const handleSave = () => {
+    onClose();
+  };
+
+  return (
+    <div className='alert-overlay'>
+      <section className='edit-container'>
+        <input 
+        className='textBox'
+        value={editTitle}
+        onChange={(e) => setEditTitle(e.target.value)}
+        />
+        <input 
+        className='textBox'
+        value={editDesc}
+        onChange={(e) => setEditDesc(e.target.value)}
+        />
+        <div className='delete-alert-options'>
+          <button className='alert-button-no' onClick={onClose}>Cancel</button>
+          <button className='alert-button-yes' onClick={handleSave}>Save</button>
+        </div>
+      </section>
+    </div>
+  )
 }
