@@ -12,6 +12,14 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
+  const handleEditTask = (id, newTitle, newDescription) => {
+    setTasks(tasks.map(task => 
+      task.id = id
+        ? { ...task, title: newTitle, description: newDescription }
+        : task
+      ));
+  };
+
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
@@ -19,14 +27,18 @@ function App() {
   return(
     <>
     <AddForm onAddTask={handleAddTask}/>
-    <AddTasksSection tasks={tasks} onDeleteTask={handleDeleteTask}/>
+    <AddTasksSection 
+    tasks={tasks} 
+    onDeleteTask={handleDeleteTask}
+    onEditTask={handleEditTask}
+    />
     </>
   );
 }
 
 export default App;
 
-function AddForm({onAddTask }) {
+function AddForm({ onAddTask }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -59,7 +71,7 @@ function AddForm({onAddTask }) {
   );
 }
 
-function AddTasksSection({ tasks, onDeleteTask }) {
+function AddTasksSection({ tasks, onDeleteTask, onEditTask }) {
   return (
     <section className="tasks">
         {tasks.map(task => (
@@ -69,13 +81,14 @@ function AddTasksSection({ tasks, onDeleteTask }) {
             title={task.title}
             description={task.description}
             onDelete={onDeleteTask}
+            onEdit={onEditTask}
           />
         ))}
     </section>
   );
 }
 
-function Task({ id, title, description, onDelete }) {
+function Task({ id, title, description, onDelete, onEdit}) {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleDeleteClick = () => {
@@ -94,12 +107,17 @@ function Task({ id, title, description, onDelete }) {
         </div>
         <button className="closeButton" onClick={handleDeleteClick}>x</button>
       </div>
-      {showOptions && <TaskOptions taskTitle={title} taskDesc={description}/>}
+      {showOptions && 
+        <TaskOptions 
+          taskId={id}
+          taskTitle={title}
+          taskDesc={description}
+          onEdit={onEdit}/>}
     </>
   );
 }
 
-function TaskOptions({ taskTitle, taskDesc }) {
+function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
   const [showInfo, setShowInfo] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
 
@@ -142,9 +160,11 @@ function TaskOptions({ taskTitle, taskDesc }) {
 
       {showEdit && (
         <TaskOptionsEdit
+          taskId={taskId}
           taskTitle={taskTitle}
           taskDesc={taskDesc}
           onClose={handleCloseEdit}
+          onEdit={onEdit}
         />
       )}
     </>
@@ -162,10 +182,11 @@ function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
   );
 }
 
-function TaskOptionsEdit({ taskTitle, taskDesc, onClose }) {
+function TaskOptionsEdit({ taskId, taskTitle, taskDesc, onClose, onEdit}) {
   const [editTitle, setEditTitle] = useState(taskTitle);
   const [editDesc, setEditDesc] = useState(taskDesc);
   const handleSave = () => {
+    onEdit(taskId, editTitle, editDesc)
     onClose();
   };
 
@@ -173,14 +194,14 @@ function TaskOptionsEdit({ taskTitle, taskDesc, onClose }) {
     <div className='alert-overlay'>
       <section className='edit-container'>
         <input 
-        className='textBox'
-        value={editTitle}
-        onChange={(e) => setEditTitle(e.target.value)}
+          className='textBox'
+          value={editTitle}
+          onChange={(e) => setEditTitle(e.target.value)}
         />
         <input 
-        className='textBox'
-        value={editDesc}
-        onChange={(e) => setEditDesc(e.target.value)}
+          className='textBox'
+          value={editDesc}
+          onChange={(e) => setEditDesc(e.target.value)}
         />
         <div className='delete-alert-options'>
           <button className='alert-button-no' onClick={onClose}>Cancel</button>
