@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) != null ? JSON.parse(localStorage.getItem('tasks')) : []);
 
   const handleAddTask = (title, description) => {
     const newTask = {
@@ -9,7 +9,7 @@ function App() {
       title: title,
       description: description,
     };
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, newTask]); 
   };
 
   const handleEditTask = (id, newTitle, newDescription) => {
@@ -23,6 +23,10 @@ function App() {
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter(task => task.id !== taskId));
   };
+  
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]); 
 
   return(
     <>
@@ -118,8 +122,17 @@ function Task({ id, title, description, onDelete, onEdit}) {
 }
 
 function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
+  const [showShare, setShowShare] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+
+  const handleShareClick = () => {
+    setShowShare(true);
+  }
+
+  const handleCloseShare = () => {
+    setShowShare(false);
+  }
 
   const handleInfoClick = () => {
     setShowInfo(true);
@@ -139,7 +152,7 @@ function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
   return (
     <>
       <div className='task-options'>
-        <button className='task-options-button'>
+        <button className='task-options-button' onClick={handleShareClick}>
           <img src="src\assets\share.svg" alt="share"/>
         </button>
         <button className='task-options-button' onClick={handleInfoClick}>
@@ -167,8 +180,67 @@ function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
           onEdit={onEdit}
         />
       )}
+
+      {showShare && (
+        <TaskOptionsShare
+          onClose={handleCloseShare}
+        />
+      )}
     </>
   );
+}
+
+function TaskOptionsShare({ onClose }) {
+  const urlToShare = window.location.href;
+  const textToShare = "Damn boy, what a cool task manager!";
+
+  const handleShareCopyClick = () => {
+    navigator.clipboard.writeText(urlToShare).then(function() {
+      alert('Link copied to clipboard');
+    });
+  }
+
+  const handleShareVKClick = () => {
+    const vkShareLink = `https://vk.com/share.php?url=${encodeURIComponent(urlToShare)}&title=${encodeURIComponent(textToShare)}`;
+    window.open(vkShareLink, '_blank');
+  }
+
+  const handleShareTGClick = () => {
+    const telegramShareLink = `https://telegram.me/share/url?url=${encodeURIComponent(urlToShare)}&text=${encodeURIComponent(textToShare)}`;
+    window.open(telegramShareLink, '_blank');
+  };
+
+  const handleShareWAClick = () => {
+    const waShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(textToShare + ' ' + urlToShare)}`;
+    window.open(waShareLink, '_blank');
+  };
+
+  const handleShareFBClick = () => {
+    const fbShareLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
+    window.open(fbShareLink, '_blank');
+  };
+
+  return (
+    <div className='alert-overlay' onClick={onClose}>
+      <section className='share-container'>
+        <button className='share-button' onClick={handleShareCopyClick}>
+          <img src="src\assets\shareCopy.svg" alt="Copy"/>
+        </button>
+        <button className='share-button' onClick={handleShareVKClick}>
+          <img src="src\assets\shareVK.svg" alt="VK"/>
+        </button>
+        <button className='share-button' onClick={handleShareTGClick}>
+          <img src="src\assets\shareTG.svg" alt="TG"/>
+        </button>
+        <button className='share-button' onClick={handleShareWAClick}>
+          <img src="src\assets\shareWA.svg" alt="WA"/>
+        </button>
+        <button className='share-button' onClick={handleShareFBClick}>
+          <img src="src\assets\shareFB.svg" alt="FB"/>
+        </button>
+      </section>
+    </div>
+  )
 }
 
 function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
@@ -199,7 +271,7 @@ function TaskOptionsEdit({ taskId, taskTitle, taskDesc, onClose, onEdit}) {
           onChange={(e) => setEditTitle(e.target.value)}
         />
         <input 
-          className='textBox'
+          className='textBox' 
           value={editDesc}
           onChange={(e) => setEditDesc(e.target.value)}
         />
