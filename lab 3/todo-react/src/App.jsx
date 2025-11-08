@@ -88,7 +88,16 @@ function AddTasksSection({ tasks, onDeleteTask, onEditTask }) {
             onEdit={onEditTask}
           />
         ))}
+        {tasks.length === 0 && <NoTasksSection/>}
     </section>
+  );
+}
+  
+function NoTasksSection() {
+  return (
+    <div className="no-tasks">
+      <h1 className="no-tasks-text">No tasks yet</h1>
+    </div>
   );
 }
 
