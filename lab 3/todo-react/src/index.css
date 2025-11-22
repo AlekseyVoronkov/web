@@ -101,6 +101,7 @@ body {
     box-sizing: border-box;
     flex: 1;
     gap: 16px;
+    z-index: 1;
 }
 
 .task {
@@ -115,6 +116,26 @@ body {
     align-items: center;
     gap: 16px;
     animation: slideInUp 0.3s ease-out forwards;
+    transition: all 0.2s ease;
+}
+.task[draggable="true"] {
+    cursor: grab;
+}
+
+.task[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.task.dragging {
+  opacity: 0.6;
+  transform: rotate(2deg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.task.pinned {
+  background: linear-gradient(135deg, #A35709 0%, #242320 100%);
+  border: 2px solid #cc6a08;
+  position: relative;
 }
 
 .task-text {
@@ -273,6 +294,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .delete-alert {
@@ -289,6 +311,7 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
     animation: slideInUp 0.3s ease-out forwards;
+    z-index: 1001;
 }
 
 .alert-title {

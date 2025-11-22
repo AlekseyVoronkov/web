@@ -1,40 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useTaskStore } from './store/taskStorage';
 
 function App() {
-  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')) != null ? JSON.parse(localStorage.getItem('tasks')) : []);
+  const { tasks, addTask, deleteTask, editTask, togglePin, reorderTasks } = useTaskStore();
 
-  const handleAddTask = (title, description) => {
-    const newTask = {
-      id: Date.now(),
-      title: title,
-      description: description,
-    };
-    setTasks([...tasks, newTask]); 
-  };
-
-  const handleEditTask = (id, newTitle, newDescription) => {
-    setTasks(tasks.map(task => 
-      task.id === id
-        ? { ...task, title: newTitle, description: newDescription }
-        : task
-      ));
-  };
-
-  const handleDeleteTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
-  };
-  
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]); 
+  console.log(tasks)
 
   return(
     <>
-    <AddForm onAddTask={handleAddTask}/>
+    <AddForm onAddTask={addTask}/>
     <AddTasksSection 
     tasks={tasks} 
-    onDeleteTask={handleDeleteTask}
-    onEditTask={handleEditTask}
+    onDeleteTask={deleteTask}
+    onEditTask={editTask}
+    onTogglePin={togglePin}
+    onReorderTasks={reorderTasks}
     />
     </>
   );
@@ -75,20 +55,43 @@ function AddForm({ onAddTask }) {
   );
 }
 
-function AddTasksSection({ tasks, onDeleteTask, onEditTask }) {
+function AddTasksSection({ tasks, onDeleteTask, onEditTask, onTogglePin, onReorderTasks }) {
+  const pinnedTasks = tasks.filter(task => task.isPinned);
+  const normalTasks = tasks.filter(task => !task.isPinned);
+
   return (
     <section className="tasks">
-        {tasks.map(task => (
-          <Task
-            key={task.id}
-            id={task.id}
-            title={task.title}
-            description={task.description}
-            onDelete={onDeleteTask}
-            onEdit={onEditTask}
-          />
-        ))}
-        {tasks.length === 0 && <NoTasksSection/>}
+      {pinnedTasks.map(task => (
+        <Task
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          description={task.description}
+          onDelete={onDeleteTask}
+          onEdit={onEditTask}
+          onTogglePin={onTogglePin}
+          isPinned={true}
+          isDraggable={false}
+          onReorder={onReorderTasks}
+        />
+      ))}
+      
+      {normalTasks.map(task => (
+        <Task
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          description={task.description}
+          onDelete={onDeleteTask}
+          onEdit={onEditTask}
+          onTogglePin={onTogglePin}
+          isPinned={false}
+          isDraggable={true}
+          onReorder={onReorderTasks}
+        />
+      ))}
+      
+      {tasks.length === 0 && <NoTasksSection/>}
     </section>
   );
 }
@@ -101,36 +104,64 @@ function NoTasksSection() {
   );
 }
 
-function Task({ id, title, description, onDelete, onEdit}) {
+function Task({ id, title, description, onDelete, onEdit, onTogglePin, isPinned, isDraggable, onReorder }) {
   const [showOptions, setShowOptions] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  
+  const handleDragStart = (e) => {
+    if (!isDraggable || isPinned) return;
+    setIsDragging(true);
+    e.dataTransfer.setData('text/plain', id.toString());
+  };
 
-  const handleDeleteClick = () => {
-    onDelete(id);
-  }
+  const handleDragOver = (e) => {
+    if (!isDraggable || isPinned) return;
+    e.preventDefault();
+  };
 
-  const handleTaskClick = () => {
-    setShowOptions(!showOptions);
-  }
+  const handleDrop = (e) => {
+    if (!isDraggable || isPinned) return;
+    e.preventDefault();
+    const draggedId = parseInt(e.dataTransfer.getData('text/plain'));
+    if (draggedId !== id) {
+      onReorder(draggedId, id);
+    }
+    setIsDragging(false);
+  };
+
+  const handleDragEnd = () => {
+    setIsDragging(false);
+  };
+
   return (
     <>
-      <div className="task" onClick={handleTaskClick}>
+    <div 
+      className={`task ${isDragging ? 'dragging' : ''} ${isPinned ? 'pinned' : ''}`}
+      draggable={isDraggable && !isPinned}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      onDragEnd={handleDragEnd}
+      onClick={() => setShowOptions(!showOptions)}
+    >
         <div className="task-text">
           <h1 className='task-title'>{title}</h1>
           <p className='task-desc'>{description}</p>
         </div>
-        <button className="closeButton" onClick={handleDeleteClick}>x</button>
+        <button className="closeButton" onClick={(e) => { e.stopPropagation(); onDelete(id); }}>x</button>
       </div>
-      {showOptions && 
-        <TaskOptions 
+      {showOptions && <TaskOptions 
           taskId={id}
           taskTitle={title}
           taskDesc={description}
-          onEdit={onEdit}/>}
-    </>
+          onEdit={onEdit}
+          onTogglePin={onTogglePin}
+        />}
+      </>
   );
 }
 
-function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
+function TaskOptions({ taskId, taskTitle, taskDesc, onEdit, onTogglePin}) {
   const [showShare, setShowShare] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -158,6 +189,10 @@ function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
   const handleCloseEdit = () => {
     setShowEdit(false);
   }
+
+  const handlePinClick = () => {
+    onTogglePin(taskId)
+  }
   return (
     <>
       <div className='task-options'>
@@ -169,6 +204,9 @@ function TaskOptions({ taskId, taskTitle, taskDesc, onEdit }) {
         </button>
         <button className='task-options-button' onClick={handleEditClick}>
           <img src="src\assets\edit.svg" alt="edit"/>
+        </button>
+        <button className='task-options-button' onClick={handlePinClick}>
+          <img src="src\assets\pin.svg" alt="pin"/>
         </button>
       </div>
 
@@ -266,6 +304,7 @@ function TaskOptionsInfo({ taskTitle, taskDesc, onClose }) {
 function TaskOptionsEdit({ taskId, taskTitle, taskDesc, onClose, onEdit}) {
   const [editTitle, setEditTitle] = useState(taskTitle);
   const [editDesc, setEditDesc] = useState(taskDesc);
+
   const handleSave = () => {
     onEdit(taskId, editTitle, editDesc)
     onClose();
